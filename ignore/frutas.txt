@@ -1,0 +1,8 @@
+abacate
+melancia
+melao
+limao
+laranja
+cenoura <- infiltrado
+morango
+manga
