@@ -6,7 +6,7 @@
 /*   By: tairan <tairan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:20:46 by tairan            #+#    #+#             */
-/*   Updated: 2022/06/25 22:46:07 by tairan           ###   ########.fr       */
+/*   Updated: 2022/06/28 18:51:21 by tairan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ char *get_next_line(int fd)
     char            *tmp;
 
     read_size = 1;
-    line = NULL;
+    line = ft_calloc(1, 1);
     while(read_size){
-        if (index == 0 || index >= BUFFER_SIZE)
+        if (index == 0)
         {
             read_size = read(fd, buffer, BUFFER_SIZE);
             if (read_size == 0)
-                return NULL;
+                break ;
         }
         text = get_text(read_size, buffer, &index);
         if (text == NULL)
@@ -39,16 +39,18 @@ char *get_next_line(int fd)
             return NULL;
         }
         tmp = ft_strjoin(line, text);
-        line = tmp;
-        free(tmp);
-        tmp = NULL;
         free(text);
-        if (line[ft_strlen(text) - 1] == '\n')
+        free(line);
+        line = tmp;
+        tmp = NULL;
+        if (index >= read_size)
+            index = 0;
+        if (line[ft_strlen(line) - 1] == '\n')
             return (line);
         if (index > read_size && read_size < BUFFER_SIZE)
-            return (line); 
+            return (line);
     }
-    return (NULL);
+    return NULL;
 }
 
 char *get_text(int size, char *buffer, size_t *index)
@@ -57,40 +59,50 @@ char *get_text(int size, char *buffer, size_t *index)
     int     line_size;
     char    *n_addr;
 
-    n_addr = ft_memchr(&buffer[*index], '\n', size);
+    n_addr = ft_memchr(&buffer[*index], '\n', size - (*index));
     if (!n_addr)
-        n_addr = &buffer[size];
+        n_addr = &buffer[size - 1];
     line_size = (((n_addr + 1) - &buffer[*index]) + 1);
     line = malloc(line_size * sizeof(char));
     if (!line)
         return NULL;
     ft_strlcpy(line, &buffer[*index], line_size);
-    // printf("index inside 1: %i\n", *index);
-    // printf("buffer: %p, n_addr: %p\n", buffer, n_addr);
     *index = n_addr + 1 - buffer;
-    // printf("index inside 2: %i\n", *index);
     return (line);
 }
 
 int main(void)
 {
     // char *str;
-    // static int index;
-    // static char buffer[10];
-    // printf("%i\n", index);
-    // ft_memcpy(buffer, "01234\n67\n9", 10);
-    // str = get_line(10, buffer, &index);
-    // printf("str: %sfind: %i\n", str, index);
-    // str = get_line(10, buffer, &index);
-    // printf("str: %sfind: %i\n", str, index);
-    // str = get_line(10, buffer, &index);
-    // printf("str: %sfind: %i\n", str, index);
+    // static size_t index;
+    // static char buffer[20];
+    // printf("%zu\n", index);
+    // ft_memcpy(buffer, "01234\n67\n90123456\n89", 20);
+    // str = get_text(20, buffer, &index);
+    // printf("str: %sfind: %zu\n", str, index);
+    // str = get_text(20, buffer, &index);
+    // printf("str: %sfind: %zu\n", str, index);
+    // str = get_text(20, buffer, &index);
+    // printf("str: %sfind: %zu\n", str, index);
+    // str = get_text(20, buffer, &index);
+    // printf("str: %sfind: %zu\n", str, index);
+    // str = get_text(20, buffer, &index);
+    // printf("str: %sfind: %zu\n", str, index);
     // free(str);
     char    *line;
     char *file_name = "ignore/frutas.txt";
     int fd;
+    int n;
+
+    n = 0;
     fd = open(file_name, O_RDONLY);
+    
     line = get_next_line(fd);
-    printf("%s", line);
+    while(line)
+    {
+        printf("n: %i, s: %s", n, line);
+        n++;
+        line = get_next_line(fd);
+    }
     close(fd);
 }

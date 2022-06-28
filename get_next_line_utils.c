@@ -6,7 +6,7 @@
 /*   By: tairan <tairan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:23:31 by tairan            #+#    #+#             */
-/*   Updated: 2022/06/25 19:21:57 by tairan           ###   ########.fr       */
+/*   Updated: 2022/06/27 18:24:36 by tairan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,40 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		i++;
 	}
 	return (dest);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*dest;
+	size_t	s1_size;
+	size_t	s2_size;
+
+	s1_size = ft_strlen(s1);
+	s2_size = ft_strlen(s2);
+	dest = ft_calloc(s1_size + s2_size + 1, sizeof(char));
+	if (!dest)
+		return (NULL);
+	ft_memcpy(dest, s1, s1_size);
+	ft_memcpy(&dest[s1_size], s2, s2_size);
+	dest[s1_size + s2_size] = '\0';
+	return (dest);
+}
+
+void	*ft_calloc(size_t num, size_t size)
+{
+	size_t			i;
+	unsigned char	*p;
+
+	i = 0;
+	if (__SIZE_MAX__ / size < num)
+		return (NULL);
+	p = malloc(num * size);
+	if (!p)
+		return (NULL);
+	while (i < num * size)
+	{
+		p[i] = 0;
+		i++;
+	}
+	return ((void *) p);
 }
