@@ -6,7 +6,7 @@
 /*   By: tairan <tairan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:20:46 by tairan            #+#    #+#             */
-/*   Updated: 2022/07/01 00:34:47 by tairan           ###   ########.fr       */
+/*   Updated: 2022/07/01 00:41:05 by tairan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_next_line(int fd)
 	size_t		read_size;
 	char		*line;
 
-	if (BUFFER_SIZE < 1 || fd < 0)
+	if (BUFFER_SIZE < 1 || fd < 0 || fd > 1023)
 		return (NULL);
 	line = NULL;
 	read_size = 0;
