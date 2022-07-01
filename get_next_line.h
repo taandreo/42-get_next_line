@@ -6,7 +6,7 @@
 /*   By: tairan <tairan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:23:06 by tairan            #+#    #+#             */
-/*   Updated: 2022/06/30 23:58:01 by tairan           ###   ########.fr       */
+/*   Updated: 2022/07/01 00:35:25 by tairan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	*ft_calloc(size_t num, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *str, int ch);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 // get_next_line
 char	*get_next_line(int fd);
 char	*join(char *line, char *text);

@@ -6,7 +6,7 @@
 /*   By: tairan <tairan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:23:31 by tairan            #+#    #+#             */
-/*   Updated: 2022/06/30 22:24:32 by tairan           ###   ########.fr       */
+/*   Updated: 2022/07/01 00:35:32 by tairan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,6 @@ char	*ft_strchr(const char *str, int ch)
 	if (c1 == c0)
 		return ((char *)&str[i]);
 	return (0);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
@@ -97,4 +85,17 @@ void	*ft_calloc(size_t num, size_t size)
 		i++;
 	}
 	return ((void *) p);
+}
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
+	return (dest);
 }

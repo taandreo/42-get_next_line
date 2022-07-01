@@ -6,11 +6,12 @@
 /*   By: tairan <tairan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:20:46 by tairan            #+#    #+#             */
-/*   Updated: 2022/06/30 23:49:09 by tairan           ###   ########.fr       */
+/*   Updated: 2022/07/01 00:34:47 by tairan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <fcntl.h>
 
 char	*get_next_line(int fd)
 {
@@ -106,4 +107,16 @@ int	main(void)
 		line = get_next_line(fd);
 	}
 	close(fd);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }
