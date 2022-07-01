@@ -6,26 +6,31 @@
 /*   By: tairan <tairan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:23:31 by tairan            #+#    #+#             */
-/*   Updated: 2022/06/27 18:24:36 by tairan           ###   ########.fr       */
+/*   Updated: 2022/06/30 17:29:55 by tairan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
-{
-	size_t			i;
-	unsigned char	*rp;
+char	*ft_strchr(const char *str, int ch)
+{	
+	unsigned char	c0;
+	unsigned char	c1;
+	int				i;
 
 	i = 0;
-	rp = (unsigned char *)s;
-	while (i < n)
+	c0 = (unsigned char) ch;
+	while (str[i])
 	{
-		if (((unsigned char *)s)[i] == (unsigned char) c)
-			return (rp + i);
+		c1 = (unsigned char) str[i];
+		if (c1 == c0)
+			return ((char *)&str[i]);
 		i++;
 	}
-	return (NULL);
+	c1 = (unsigned char) str[i];
+	if (c1 == c0)
+		return ((char *)&str[i]);
+	return (0);
 }
 
 size_t	ft_strlen(const char *s)
