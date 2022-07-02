@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tairan <tairan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tairribe <tairribe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:20:46 by tairan            #+#    #+#             */
-/*   Updated: 2022/07/01 00:41:05 by tairan           ###   ########.fr       */
+/*   Updated: 2022/07/02 02:15:18 by tairribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ char	*get_next_line(int fd)
 	line = NULL;
 	read_size = 0;
 	if (!buffer[fd])
-		read_size = read_buffer(buffer, BUFFER_SIZE, fd);
+		read_size = read_buffer(&buffer[fd], BUFFER_SIZE, fd);
 	while (read_size || buffer[fd])
 	{
 		line = join(line, get_text(&buffer[fd]));
 		if (line[ft_strlen(line) - 1] == '\n')
 			return (line);
 		if (!buffer[fd])
-			read_size = read_buffer(buffer, BUFFER_SIZE, fd);
+			read_size = read_buffer(&buffer[fd], BUFFER_SIZE, fd);
 	}
 	return (line);
 }
@@ -39,18 +39,20 @@ char	*get_next_line(int fd)
 size_t	read_buffer(char **buffer, size_t size, int fd)
 {
 	size_t	read_size;
-
-	buffer[fd] = malloc(size + 1 * sizeof(char));
-	if (!buffer[fd])
+	char	*b;
+	
+	*buffer = malloc((size + 1) * sizeof(char));
+	if (!*buffer)
 		return (0);
-	read_size = read(fd, buffer[fd], size);
+	read_size = read(fd, *buffer, size);
 	if (read_size == 0)
 	{
-		free(buffer[fd]);
-		buffer[fd] = NULL;
+		free(*buffer);
+		buffer[0] = NULL;
 		return (0);
 	}
-	(buffer[fd])[read_size] = '\0';
+	b = *buffer;
+	b[read_size] = '\0';
 	return (read_size);
 }
 
@@ -84,35 +86,22 @@ char	*get_text(char **buffer)
 
 char	*join(char *line, char *text)
 {
+	char	*tmp;
+	
 	if (!line)
 		return (text);
-	return (ft_strjoin(line, text));
-}
-
-int	main(void)
-{
-	char	*line;
-	char	*file_name;
-	int		fd;
-	int		n;
-
-	file_name = "ignore/frutas.txt";
-	n = 0;
-	fd = open(file_name, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		printf("n: %i, s: %s", n, line);
-		n++;
-		line = get_next_line(fd);
-	}
-	close(fd);
+	tmp = ft_strjoin(line, text);
+	free(line);
+	free(text);
+	return (tmp);	
 }
 
 size_t	ft_strlen(const char *s)
 {
 	int	i;
-
+	
+	if (!s)
+		return (0);
 	i = 0;
 	while (s[i] != '\0')
 	{
