@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tairribe <tairribe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: tairan <tairan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:20:46 by tairan            #+#    #+#             */
-/*   Updated: 2022/07/02 02:15:18 by tairribe         ###   ########.fr       */
+/*   Updated: 2022/07/03 17:40:57 by tairan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <fcntl.h>
 
 char	*get_next_line(int fd)
 {
@@ -64,6 +63,9 @@ char	*get_text(char **buffer)
 	char	*tmp;
 
 	tmp = NULL;
+	if (!*buffer)
+		return (NULL);
+		// return (ft_calloc(1, sizeof(char)));
 	len = ft_strlen(*buffer);
 	if (!ft_strchr(*buffer, '\n'))
 		n = len;
@@ -101,6 +103,8 @@ size_t	ft_strlen(const char *s)
 	int	i;
 	
 	if (!s)
+		return (0);
+	if (!*s)
 		return (0);
 	i = 0;
 	while (s[i] != '\0')
