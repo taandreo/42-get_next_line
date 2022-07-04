@@ -9,7 +9,7 @@ BUFFER_SIZE = 42
 VALGRIND = valgrind --leak-check=full -v
 
 all:
-	$(CC) $(CFLAGS) $(MAIN) -D BUFFER_SIZE=$(BUFFER_SIZE) -o $(OUT)
+	$(CC) $(CFLAGS) $(MAIN) -D BUFFER_SIZE=$(BUFFER_SIZE) -o $(OUT) -arch x86_64
 
 clean: 
 	rm -f $(OUT)

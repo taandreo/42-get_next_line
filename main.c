@@ -8,8 +8,8 @@ int    main(void)
    char    *file_name;
    int		fd;
    int      n;
-   // file_name = "/Users/tairan/42/get_next_line/tripouille/files/alternate_line_nl_with_nl";
-   file_name = "/project/tripouille/files/alternate_line_nl_with_nl";
+   file_name = "/Users/tairan/42/get_next_line/tripouille/files/41_no_nl";
+   // file_name = "/project/tripouille/files/41_no_nl";
    n = 0;
    fd = open(file_name, O_RDONLY);
    printf("%i\n", fd);
@@ -17,8 +17,10 @@ int    main(void)
    while (line)
    {
         printf("n: %i, s: %s", n, line);
+        free(line);
         n++;
         line = get_next_line(fd);
    }
    close(fd);
+   // get_next_line(1000);
 }
