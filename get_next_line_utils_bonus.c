@@ -6,11 +6,11 @@
 /*   By: tairan <tairan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:23:31 by tairan            #+#    #+#             */
-/*   Updated: 2022/07/04 19:54:48 by tairan           ###   ########.fr       */
+/*   Updated: 2022/07/04 20:56:49 by tairan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {

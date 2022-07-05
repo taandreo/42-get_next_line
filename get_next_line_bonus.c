@@ -6,11 +6,11 @@
 /*   By: tairan <tairan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:20:46 by tairan            #+#    #+#             */
-/*   Updated: 2022/07/04 19:54:41 by tairan           ###   ########.fr       */
+/*   Updated: 2022/07/04 21:01:10 by tairan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static size_t	read_buffer(char **buffer, size_t size, int fd)
 {
